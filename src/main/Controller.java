@@ -102,8 +102,8 @@ class Controller implements MouseListener, KeyListener {
 
         } else {
 
-            System.out.println("ERROR: Game is currently in 'Play' mode. Editing is not allowed.");
-            System.out.println("Press 'e' to switch modes.\n");
+            System.out.println("ERROR: Game is currently in 'play' mode, editing is not allowed");
+            System.out.println("Press 'e' to switch modes\n");
 
         }
 
@@ -163,9 +163,20 @@ class Controller implements MouseListener, KeyListener {
 
             // Clear map 'c'
             case KeyEvent.VK_C:
-                System.out.println("Clearing bricks from the map...");
-                model.bricks.clear();
-                System.out.println("Successfully cleared bricks\n");
+                if (editingMode) {
+
+                    System.out.println("Clearing bricks from the map...");
+                    model.bricks.clear();
+                    System.out.println("Successfully cleared bricks\n");
+
+                } else {
+
+                    System.out.println("Clearing can only be done in 'edit' mode");
+                    System.out.println("Press 'e' to switch modes\n");
+
+                }
+
+
                 break;
 
             // If escape key is pressed, exit the program 'esc'

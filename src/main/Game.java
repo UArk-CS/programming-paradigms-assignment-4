@@ -46,7 +46,7 @@ public class Game extends JFrame {
         System.out.println("Press 'e' to switch between edit and play modes");
         System.out.println("Press 's' to save your map");
         System.out.println("Press 'l' to load your map");
-        System.out.println("Press 'c' to clear the map\n");
+        System.out.println("Press 'c' to clear the map (in edit mode only)\n");
 
         if (g.controller.isEditingMode()) {
             System.out.println("Game is currently in edit mode\n");
@@ -70,7 +70,7 @@ public class Game extends JFrame {
 
         } catch (Exception e) {
 
-            System.out.println("Auto loading failed. No map file found.");
+            System.out.println("Auto loading failed, no map file found");
             e.printStackTrace();
 
         }
