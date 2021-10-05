@@ -27,7 +27,7 @@ public class Game extends JFrame {
         this.addKeyListener(controller);
 
         // Setting up Game window
-        this.setTitle("Map Editor");
+        this.setTitle("Mario: The Beginning");
         this.setSize(500, 500);
         this.setBackground(Color.white);
         this.setFocusable(true);
@@ -41,14 +41,25 @@ public class Game extends JFrame {
 
         // Instantiating new game object and calling the run method
         Game g = new Game();
-        System.out.println("Press esc to Quit the game");
-        System.out.println("Press s to save your map");
-        System.out.println("Press l to load your map");
+        System.out.println("Controls:");
+        System.out.println("Press 'esc' to Quit the game");
+        System.out.println("Press 'e' to switch between edit and play modes");
+        System.out.println("Press 's' to save your map");
+        System.out.println("Press 'l' to load your map\n");
+
+        if (g.controller.isEditingMode()) {
+            System.out.println("Game is currently in edit mode\n");
+        } else {
+            System.out.println("Game is currently in play mode\n");
+        }
+
         g.run();
 
     }
 
     public void run() {
+
+        // Auto load map.json
 
         while(true) {
 

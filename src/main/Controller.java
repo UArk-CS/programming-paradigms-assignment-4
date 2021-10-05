@@ -13,22 +13,37 @@ class Controller implements MouseListener, KeyListener {
     View view;
     Model model;
 
+    // Declaring private member variable to track if game is in editing mode (true) or play mode (false)
+    private boolean editingMode;
+
     // Declaring private member variables to hold temp xPos and yPos
     private int tempXPos;
     private int tempYPos;
+
+    // Declaring private member variables for the left and right arrow keys
     private boolean keyLeftArrow;
     private boolean keyRightArrow;
 
     // Controller constructor
     Controller(Model m) {
         model = m;
+        editingMode = false;   // start the game in 'play' mode
     }
 
-    // Setter method for view
+    // Getter and Setter methods
     void setView(View v) {
         view = v;
     }
 
+    public boolean isEditingMode() {
+        return editingMode;
+    }
+
+    public void setEditingMode(boolean editingMode) {
+        this.editingMode = editingMode;
+    }
+
+    // Update method
     void update() {
 
         // If left or right key is pressed, move camera
@@ -45,37 +60,52 @@ class Controller implements MouseListener, KeyListener {
     // Mouse Event methods
     public void mousePressed(MouseEvent e) {
 
-        // Get x and y coordinates where mouse is pressed
-        tempXPos = e.getX();
-        tempYPos = e.getY();
+        // IF game is in editing mode, then allow creation of bricks
+        if (editingMode) {
+
+            // Get x and y coordinates where mouse is pressed
+            tempXPos = e.getX();
+            tempYPos = e.getY();
+
+        }
 
     }
 
     public void mouseReleased(MouseEvent e) {
 
-        // Get x and y coordinates where mouse is released
-        int tempFinalXPos = e.getX();
-        int tempFinalYPos = e.getY();
+        // IF game is in editing mode, then allow the creation of bricks
+        if (editingMode) {
 
-        // Calculate width and height
-        int tempWidth = tempFinalXPos - tempXPos;
-        int tempHeight = tempFinalYPos - tempYPos;
+            // Get x and y coordinates where mouse is released
+            int tempFinalXPos = e.getX();
+            int tempFinalYPos = e.getY();
 
-        // Get the absolute value of the width and height
-        tempWidth = Math.abs(tempWidth);
-        tempHeight = Math.abs(tempHeight);
+            // Calculate width and height
+            int tempWidth = tempFinalXPos - tempXPos;
+            int tempHeight = tempFinalYPos - tempYPos;
 
-        // Flip the x and y coordinates if box is drawn instead of top left corner to bottom right corner
-        if (tempXPos > tempFinalXPos) {
-            tempXPos = tempFinalXPos;
+            // Get the absolute value of the width and height
+            tempWidth = Math.abs(tempWidth);
+            tempHeight = Math.abs(tempHeight);
+
+            // Flip the x and y coordinates if box is drawn instead of top left corner to bottom right corner
+            if (tempXPos > tempFinalXPos) {
+                tempXPos = tempFinalXPos;
+            }
+
+            if (tempYPos > tempFinalYPos) {
+                tempYPos = tempFinalYPos;
+            }
+
+            // Create new Brick object with proper values
+            model.createBrick(tempXPos + model.getCameraPos(), tempYPos, tempWidth, tempHeight);
+
+        } else {
+
+            System.out.println("ERROR: Game is currently in 'Play' mode. Editing is not allowed.");
+            System.out.println("Press 'e' to switch modes.\n");
+
         }
-
-        if (tempYPos > tempFinalYPos) {
-            tempYPos = tempFinalYPos;
-        }
-
-        // Create new Brick object with proper values
-        model.createBrick(tempXPos + model.getCameraPos(), tempYPos, tempWidth, tempHeight);
 
     }
 
@@ -100,20 +130,36 @@ class Controller implements MouseListener, KeyListener {
                 keyRightArrow = true;
                 break;
 
-            // Save map
+            // Switch between modes 'edit' and 'play' with 'e'
+            case KeyEvent.VK_E:
+                if (!editingMode) {
+
+                    System.out.println("Switching to edit mode...\n");
+                    editingMode = true;
+
+                } else if (editingMode) {
+
+                    System.out.println("Switching to play mode...\n");
+                    editingMode = false;
+
+                }
+
+                break;
+
+            // Save map 's'
             case KeyEvent.VK_S:
-                System.out.println("Saving map...");
+                System.out.println("Saving map...\n");
                 model.marshal().save("map.json");
                 break;
 
-            // Load map
+            // Load map 'l'
             case KeyEvent.VK_L:
-                System.out.println("Loading map...");
+                System.out.println("Loading map...\n");
                 Json file = Json.load("map.json");
                 model.unmarshal(file);
                 break;
 
-            // If escape key is pressed, exit the program
+            // If escape key is pressed, exit the program 'esc'
             case KeyEvent.VK_ESCAPE:
                 System.out.println("Exiting program...");
                 System.exit(0);
