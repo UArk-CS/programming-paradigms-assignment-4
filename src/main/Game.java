@@ -45,7 +45,8 @@ public class Game extends JFrame {
         System.out.println("Press 'esc' to Quit the game");
         System.out.println("Press 'e' to switch between edit and play modes");
         System.out.println("Press 's' to save your map");
-        System.out.println("Press 'l' to load your map\n");
+        System.out.println("Press 'l' to load your map");
+        System.out.println("Press 'c' to clear the map\n");
 
         if (g.controller.isEditingMode()) {
             System.out.println("Game is currently in edit mode\n");

@@ -148,15 +148,24 @@ class Controller implements MouseListener, KeyListener {
 
             // Save map 's'
             case KeyEvent.VK_S:
-                System.out.println("Saving map...\n");
+                System.out.println("Saving map...");
                 model.marshal().save("map.json");
+                System.out.println("Successfully saved map\n");
                 break;
 
             // Load map 'l'
             case KeyEvent.VK_L:
-                System.out.println("Loading map...\n");
+                System.out.println("Loading map...");
                 Json file = Json.load("map.json");
                 model.unmarshal(file);
+                System.out.println("Successfully loaded map\n");
+                break;
+
+            // Clear map 'c'
+            case KeyEvent.VK_C:
+                System.out.println("Clearing bricks from the map...");
+                model.bricks.clear();
+                System.out.println("Successfully cleared bricks\n");
                 break;
 
             // If escape key is pressed, exit the program 'esc'
