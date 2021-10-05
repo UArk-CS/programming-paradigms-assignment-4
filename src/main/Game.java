@@ -60,6 +60,19 @@ public class Game extends JFrame {
     public void run() {
 
         // Auto load map.json
+        try {
+
+            System.out.println("Auto loading map...");
+            Json file = Json.load("map.json");
+            model.unmarshal(file);
+            System.out.println("Map successfully loaded\n");
+
+        } catch (Exception e) {
+
+            System.out.println("Auto loading failed. No map file found.");
+            e.printStackTrace();
+
+        }
 
         while(true) {
 
