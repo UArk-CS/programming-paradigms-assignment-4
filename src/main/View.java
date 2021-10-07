@@ -12,7 +12,12 @@ class View extends JPanel {
 
     // Declaring member variables
     Model model;
-    Color brickRed = new Color(203, 65, 84);
+
+    // Declaring final (un-modifiable) member variables holding Color objects
+    private final Color slateGray = new Color(112, 128, 144);
+    private final Color skyBlue = new Color(135, 206, 235);
+    private final Color dirtBrown = new Color(155, 118, 83);
+    private final Color grassGreen = new Color(0, 154, 23);
 
     // View constructor
     View(Controller c, Model m) {
@@ -29,14 +34,22 @@ class View extends JPanel {
     public void paintComponent(Graphics g) {
 
         // Set background color
-        g.setColor(Color.white);
+        g.setColor(skyBlue);
         g.fillRect(0, 0, this.getWidth(), this.getHeight());
+
+        // Draw dirt
+        g.setColor(dirtBrown);
+        g.fillRect(0, this.getHeight() - 70, this.getWidth(), 70);
+
+        // Draw grass
+        g.setColor(grassGreen);
+        g.fillRect(0, this.getHeight() - 100, this.getWidth(), 30);
 
         for (int i = 0; i < model.getBricks().size(); i++) {
 
             // Get brick, set color, and paint to the screen
             Brick temp = model.getBricks().get(i);
-            g.setColor(brickRed);
+            g.setColor(slateGray);
             g.fillRect(temp.getxPos() - model.getCameraPos(), temp.getyPos(), temp.getWidth(), temp.getHeight());
 
         }
