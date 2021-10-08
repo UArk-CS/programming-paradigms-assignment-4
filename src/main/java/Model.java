@@ -87,8 +87,12 @@ public class Model {
         return marioImageCount;
     }
 
-    public void setMarioImageCount(int marioImageCount) {
-        this.marioImageCount = marioImageCount;
+    public void setMarioImageCountToZero() {
+        this.marioImageCount = 0;
+    }
+
+    public void incrementMarioImageCount() {
+        this.marioImageCount++;
     }
 
     // Create new Brick object and add it to Brick ArrayList

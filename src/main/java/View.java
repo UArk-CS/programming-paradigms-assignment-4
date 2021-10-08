@@ -75,7 +75,7 @@ class View extends JPanel {
         }
 
         // Draw Mario
-        g.drawImage(marioImages[model.getMarioImageCount()], 20, this.getHeight() - 200, null);
+        g.drawImage(marioImages[model.getMarioImageCount()], model.mario.getXPos(), model.mario.getYPos(), null);
 
     }
 

@@ -55,6 +55,16 @@ class Controller implements MouseListener, KeyListener {
             model.setCameraPosRight(5);
         }
 
+        if (keyLeftArrow || keyRightArrow) {
+
+            model.incrementMarioImageCount();
+
+            if (model.getMarioImageCount() > 4) {
+                model.setMarioImageCountToZero();
+            }
+
+        }
+
     }
 
     // Mouse Event methods
