@@ -7,17 +7,22 @@
 // Import statements
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 class View extends JPanel {
-
-    // Declaring member variables
-    Model model;
 
     // Declaring final (un-modifiable) member variables holding Color objects
     private final Color slateGray = new Color(112, 128, 144);
     private final Color skyBlue = new Color(135, 206, 235);
     private final Color dirtBrown = new Color(155, 118, 83);
     private final Color grassGreen = new Color(0, 154, 23);
+
+    // Declaring member variable for object reference to Model
+    Model model;
+
+    // Declaring private member variable for an array of BufferedImages
+    // to hold Mario images
+    private BufferedImage[] marioImages;
 
     // View constructor
     View(Controller c, Model m) {
@@ -27,6 +32,20 @@ class View extends JPanel {
 
         // Tell the controller what view to use
         c.setView(this);
+
+        // Instantiate marioImages array with a capacity of 5
+        marioImages = new BufferedImage[5];
+
+        // Load the mario images into the array
+        for (int i = 0; i <= 4; i++) {
+
+            if (marioImages[i] == null) {
+
+                marioImages[i] = model.loadImage("src/main/resources/mario" + (i + 1) + ".png");
+
+            }
+
+        }
 
     }
 
@@ -45,6 +64,7 @@ class View extends JPanel {
         g.setColor(grassGreen);
         g.fillRect(0, this.getHeight() - 100, this.getWidth(), 30);
 
+        // Draw all bricks in the array to the screen
         for (int i = 0; i < model.getBricks().size(); i++) {
 
             // Get brick, set color, and paint to the screen
@@ -53,6 +73,9 @@ class View extends JPanel {
             g.fillRect(temp.getxPos() - model.getCameraPos(), temp.getyPos(), temp.getWidth(), temp.getHeight());
 
         }
+
+        // Draw Mario
+        g.drawImage(marioImages[model.getMarioImageCount()], 20, this.getHeight() - 200, null);
 
     }
 

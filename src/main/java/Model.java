@@ -6,18 +6,30 @@
 
 // Import Statements
 import java.util.ArrayList;
+import java.io.File;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
 
 public class Model {
+
+    // Declaring member variable for object reference to Mario
+    Mario mario;
 
     // Declare ArrayList of Brick objects
     ArrayList<Brick> bricks;
 
     // Declare private member variables
     private int cameraPos;
+    private int marioImageCount;
 
     // Default constructor
     Model() {
+
+        mario = new Mario();
         bricks = new ArrayList<>();
+        cameraPos = 0;
+        marioImageCount = 0;
+
     }
 
     // Marshal Model obj
@@ -71,6 +83,14 @@ public class Model {
         this.cameraPos += cameraPos;
     }
 
+    public int getMarioImageCount() {
+        return marioImageCount;
+    }
+
+    public void setMarioImageCount(int marioImageCount) {
+        this.marioImageCount = marioImageCount;
+    }
+
     // Create new Brick object and add it to Brick ArrayList
     public void createBrick(int x, int y, int w, int h) {
 
@@ -79,8 +99,29 @@ public class Model {
 
     }
 
+    // Load Mario images
+    public BufferedImage loadImage(String imgFile) {
+
+        BufferedImage tempImgFile = null;
+
+        try {
+
+            tempImgFile = ImageIO.read(new File(imgFile));
+            System.out.println(imgFile + " has been successfully loaded");
+
+        } catch (Exception e) {
+
+            System.out.println("ERROR: Images were not loaded properly");
+            e.printStackTrace();
+            System.exit(1);
+
+        }
+
+        return tempImgFile;
+
+    }
+
     // Update method
     public void update() {}
 
 }
-
