@@ -5,6 +5,10 @@
 
 public class Mario {
 
+    // Declaring private final member variable
+    private final int groundPos = 400;
+    private final int marioImageHeight = 95;
+
     // Declaring private member variables
     private int xPos;
     private int yPos;
@@ -42,6 +46,20 @@ public class Mario {
 
     public void setVerticalVelocity(double verticalVelocity) {
         this.verticalVelocity = verticalVelocity;
+    }
+
+    void update() {
+
+        verticalVelocity += 1.2;
+        yPos += verticalVelocity;
+
+        if (yPos > (groundPos) - marioImageHeight) {
+
+            verticalVelocity = 0.0;
+            yPos = groundPos - marioImageHeight;
+
+        }
+
     }
 
 }

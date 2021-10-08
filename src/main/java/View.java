@@ -17,6 +17,9 @@ class View extends JPanel {
     private final Color dirtBrown = new Color(155, 118, 83);
     private final Color grassGreen = new Color(0, 154, 23);
 
+    // Declaring final member variable to hold height of mario images
+    private final int marioImageHeight = 95;
+
     // Declaring member variable for object reference to Model
     Model model;
 
@@ -47,6 +50,11 @@ class View extends JPanel {
 
         }
 
+    }
+
+    // Getter and Setter methods
+    public int getMarioImageHeight() {
+        return marioImageHeight;
     }
 
     // View.repaint() (update method)

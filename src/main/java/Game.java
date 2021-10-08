@@ -28,7 +28,7 @@ public class Game extends JFrame {
 
         // Setting up Game window
         this.setTitle("Mario: The Beginning");
-        this.setSize(500, 500);
+        this.setSize(750, 500);
         this.setBackground(Color.white);
         this.setFocusable(true);
         this.getContentPane().add(view);

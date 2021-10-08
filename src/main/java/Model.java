@@ -126,6 +126,10 @@ public class Model {
     }
 
     // Update method
-    public void update() {}
+    public void update() {
+
+        mario.update();
+
+    }
 
 }
