@@ -17,15 +17,8 @@ class View extends JPanel {
     private final Color dirtBrown = new Color(155, 118, 83);
     private final Color grassGreen = new Color(0, 154, 23);
 
-    // Declaring final member variable to hold height of mario images
-    private final int marioImageHeight = 95;
-
     // Declaring member variable for object reference to Model
     Model model;
-
-    // Declaring private member variable for an array of BufferedImages
-    // to hold Mario images
-    private BufferedImage[] marioImages;
 
     // View constructor
     View(Controller c, Model m) {
@@ -36,25 +29,6 @@ class View extends JPanel {
         // Tell the controller what view to use
         c.setView(this);
 
-        // Instantiate marioImages array with a capacity of 5
-        marioImages = new BufferedImage[5];
-
-        // Load the mario images into the array
-        for (int i = 0; i <= 4; i++) {
-
-            if (marioImages[i] == null) {
-
-                marioImages[i] = model.loadImage("src/main/resources/mario" + (i + 1) + ".png");
-
-            }
-
-        }
-
-    }
-
-    // Getter and Setter methods
-    public int getMarioImageHeight() {
-        return marioImageHeight;
     }
 
     // View.repaint() (update method)
@@ -83,7 +57,7 @@ class View extends JPanel {
         }
 
         // Draw Mario
-        g.drawImage(marioImages[model.getMarioImageCount()], model.mario.getXPos(), model.mario.getYPos(), null);
+        g.drawImage(model.mario.getMarioImages()[model.getMarioImageCount()], model.mario.getXPos(), model.mario.getYPos(), null);
 
     }
 

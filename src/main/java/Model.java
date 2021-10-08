@@ -103,8 +103,8 @@ public class Model {
 
     }
 
-    // Load Mario images
-    public BufferedImage loadImage(String imgFile) {
+    // Load images
+    public static BufferedImage loadImage(String imgFile) {
 
         BufferedImage tempImgFile = null;
 

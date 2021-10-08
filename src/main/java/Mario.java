@@ -3,7 +3,13 @@
 // CSCE 3193 - Assignment 4
 // Mario.java
 
+// Import Statements
+import java.awt.image.BufferedImage;
+
 public class Mario {
+
+    // Declaring a static BufferedImage array to hold the mario images
+    static BufferedImage[] marioImages;
 
     // Declaring private final member variable
     private final int groundPos = 400;
@@ -20,6 +26,18 @@ public class Mario {
         xPos = 0;
         yPos = 0;
         verticalVelocity = 0.0;
+
+        marioImages = new BufferedImage[5];
+
+        for (int i = 0; i <= 4; i++) {
+
+            if (marioImages[i] == null) {
+
+                marioImages[i] = Model.loadImage("src/main/resources/mario" + (i + 1) + ".png");
+
+            }
+
+        }
 
     }
 
@@ -46,6 +64,10 @@ public class Mario {
 
     public void setVerticalVelocity(double verticalVelocity) {
         this.verticalVelocity = verticalVelocity;
+    }
+
+    public BufferedImage[] getMarioImages() {
+        return marioImages;
     }
 
     void update() {
