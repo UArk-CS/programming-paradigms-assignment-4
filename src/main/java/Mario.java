@@ -18,6 +18,7 @@ public class Mario {
     // Declaring private member variables
     private int xPos;
     private int yPos;
+    private int marioJumpCounter;
     private double verticalVelocity;
 
     // Default constructor
@@ -25,6 +26,7 @@ public class Mario {
 
         xPos = 0;
         yPos = 0;
+        marioJumpCounter = 0;
         verticalVelocity = 0.0;
 
         marioImages = new BufferedImage[5];
@@ -70,6 +72,16 @@ public class Mario {
         return marioImages;
     }
 
+    public int getMarioJumpCounter() {
+        return marioJumpCounter;
+    }
+
+    void jump() {
+
+        verticalVelocity -= 6;
+
+    }
+
     void update() {
 
         verticalVelocity += 1.2;
@@ -81,6 +93,18 @@ public class Mario {
             yPos = groundPos - marioImageHeight;
 
         }
+
+        if (yPos == (groundPos - marioImageHeight)) {
+
+            marioJumpCounter = 0;
+
+        } else {
+
+            marioJumpCounter++;
+
+        }
+
+        System.out.println("Jump Count: " + marioJumpCounter + " Mario Y: " + yPos + " Ground: " + groundPos);
 
     }
 

@@ -23,6 +23,8 @@ class Controller implements MouseListener, KeyListener {
     // Declaring private member variables for the left and right arrow keys
     private boolean keyLeftArrow;
     private boolean keyRightArrow;
+    private boolean keyUpArrow;
+    private boolean keySpacebar;
 
     // Controller constructor
     Controller(Model m) {
@@ -46,7 +48,7 @@ class Controller implements MouseListener, KeyListener {
     // Update method
     void update() {
 
-        // If left or right key is pressed, move camera
+        // If left or right key is pressed, move mario
         if (keyLeftArrow) {
             model.setCameraPosLeft(5);
         }
@@ -55,6 +57,7 @@ class Controller implements MouseListener, KeyListener {
             model.setCameraPosRight(5);
         }
 
+        // If left or right arrow are pressed, move ("animate") mario
         if (keyLeftArrow || keyRightArrow) {
 
             model.incrementMarioImageCount();
@@ -65,9 +68,21 @@ class Controller implements MouseListener, KeyListener {
 
         }
 
+        // If neither left or right key are pressed, reset mario's image
         if (!keyLeftArrow && !keyRightArrow) {
 
             model.setMarioImageCountToZero();
+
+        }
+
+        if (keyUpArrow || keySpacebar) {
+
+            System.out.println("Reaching jump");
+
+            if (model.mario.getMarioJumpCounter() < 5) {
+                model.mario.jump();
+                System.out.println("Supposedly jumped");
+            }
 
         }
 
@@ -146,6 +161,18 @@ class Controller implements MouseListener, KeyListener {
                 keyRightArrow = true;
                 break;
 
+            // If up arrow key is pressed, set it to true
+            case KeyEvent.VK_UP:
+                System.out.println("Up arrow pressed");
+                keyUpArrow = true;
+                break;
+
+            // If spacebar key is pressed, set it to true
+            case KeyEvent.VK_SPACE:
+                System.out.println("Spacebar pressed");
+                keySpacebar = true;
+                break;
+
             // Switch between modes 'edit' and 'play' with 'e'
             case KeyEvent.VK_E:
                 if (!editingMode) {
@@ -217,6 +244,16 @@ class Controller implements MouseListener, KeyListener {
             // If right arrow is released, set to false
             case KeyEvent.VK_RIGHT:
                 keyRightArrow = false;
+                break;
+
+            // If up arrow key is pressed, set it to false
+            case KeyEvent.VK_UP:
+                keyUpArrow = false;
+                break;
+
+            // If spacebar key is pressed, set it to false
+            case KeyEvent.VK_SPACE:
+                keySpacebar = false;
                 break;
 
         }
