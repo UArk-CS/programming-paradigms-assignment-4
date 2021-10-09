@@ -8,6 +8,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Iterator;
 
 class View extends JPanel {
 
@@ -42,11 +43,11 @@ class View extends JPanel {
         // Draw background image, move it as mario moves at a fraction of the rate
         g.drawImage(backgroundImage, 0 - (model.getCameraPos() / 10), 0, this.getWidth() + 100, this.getHeight(), null);
 
-        // Draw all bricks in the array to the screen
-        for (int i = 0; i < model.getBricks().size(); i++) {
+        Iterator<Brick> iterator = model.getBricks().iterator();
 
-            // Get brick, set color, and paint to the screen
-            Brick temp = model.getBricks().get(i);
+        while(iterator.hasNext()) {
+
+            Brick temp = iterator.next();
             g.drawImage(temp.getBrickImage(), temp.getxPos() - model.getCameraPos(), temp.getyPos(), temp.getWidth(), temp.getHeight(), null);
 
         }
