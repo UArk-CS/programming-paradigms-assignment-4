@@ -11,6 +11,9 @@ import java.awt.image.BufferedImage;
 
 class View extends JPanel {
 
+    // Declaring static BufferedImage to hold background image
+    static BufferedImage backgroundImage;
+
     // Declaring final (un-modifiable) member variables holding Color objects
     private final Color slateGray = new Color(112, 128, 144);
     private final Color skyBlue = new Color(135, 206, 235);
@@ -29,22 +32,15 @@ class View extends JPanel {
         // Tell the controller what view to use
         c.setView(this);
 
+        backgroundImage = Model.loadImage("src/main/resources/background.png");
+
     }
 
     // View.repaint() (update method)
     public void paintComponent(Graphics g) {
 
-        // Set background color
-        g.setColor(skyBlue);
-        g.fillRect(0, 0, this.getWidth(), this.getHeight());
-
-        // Draw dirt
-        g.setColor(dirtBrown);
-        g.fillRect(0, this.getHeight() - 70, this.getWidth(), 70);
-
-        // Draw grass
-        g.setColor(grassGreen);
-        g.fillRect(0, this.getHeight() - 100, this.getWidth(), 30);
+        // Draw background image, move it as mario moves at a fraction of the rate
+        g.drawImage(backgroundImage, 0 - (model.getCameraPos() / 10), 0, this.getWidth() + 100, this.getHeight(), null);
 
         // Draw all bricks in the array to the screen
         for (int i = 0; i < model.getBricks().size(); i++) {
