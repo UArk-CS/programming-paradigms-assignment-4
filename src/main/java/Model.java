@@ -18,16 +18,11 @@ public class Model {
     // Declare ArrayList of Brick objects
     ArrayList<Brick> bricks;
 
-    // Declare private member variables
-    // private int marioImageCount;
-
     // Default constructor
     Model() {
 
         mario = new Mario();
         bricks = new ArrayList<>();
-        // cameraPos = 0;
-        // marioImageCount = 0;
 
     }
 
@@ -35,8 +30,6 @@ public class Model {
     Json marshal() {
 
         Json obj = Json.newObject();
-
-        // obj.add("cameraPos", cameraPos);
 
         Json tmplist = Json.newList();
         obj.add("bricks", tmplist);
@@ -57,8 +50,6 @@ public class Model {
             bricks.add(new Brick(tmpList.get(i)));
         }
 
-        // cameraPos = (int)obj.getLong("cameraPos");
-
     }
 
     // Getter and Setter methods
@@ -69,30 +60,6 @@ public class Model {
     public void setBricks(ArrayList<Brick> bricks) {
         this.bricks = bricks;
     }
-
-    // public int getCameraPos() {
-    //     return cameraPos;
-    // }
-    //
-    // public void setCameraPosLeft(int cameraPos) {
-    //     this.cameraPos -= cameraPos;
-    // }
-    //
-    // public void setCameraPosRight(int cameraPos) {
-    //     this.cameraPos += cameraPos;
-    // }
-
-    // public int getMarioImageCount() {
-    //     return marioImageCount;
-    // }
-    //
-    // public void setMarioImageCountToZero() {
-    //     this.marioImageCount = 0;
-    // }
-    //
-    // public void incrementMarioImageCount() {
-    //     this.marioImageCount++;
-    // }
 
     // Create new Brick object and add it to Brick ArrayList
     public void createBrick(int x, int y, int w, int h) {

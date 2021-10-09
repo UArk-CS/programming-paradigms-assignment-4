@@ -54,27 +54,17 @@ class Controller implements MouseListener, KeyListener {
         int brickBottom = (brick.getyPos() + brick.getHeight());
 
         // Left
-        // Mario is NOT colliding if marios right < bricks Left
-        // mario right is mario's x + marios width
-        // bricks left is bricks x
         if (marioRight < brick.getxPos()) {
             // System.out.println("Not colliding on left");
             return false;
         }
 
         // Right
-        // Mario is NOT colliding is marios left > bricks right
-        // marios left is marios x
-        // bricks right is bricks x + bricks width
         if (model.mario.getXPos() > brickRight) {
             return false;
         }
 
         // Top
-        // mario head is y
-        // mario toes is y + Height
-        // brick top is y
-        // brick Bottom is y + Height
         if (marioToes < brick.getyPos()) {
             return false;
         }
