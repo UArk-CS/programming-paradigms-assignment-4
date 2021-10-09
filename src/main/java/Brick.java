@@ -4,9 +4,15 @@
 // draw bricks and scroll left and right
 // Brick.java
 
+// Import Statements
+import java.awt.image.BufferedImage;
+
 public class Brick {
 
-    // Declare member variables
+    // Declaring a static BufferedImage to hold the brick image
+    static BufferedImage brickImage;
+
+    // Declare private member variables
     private int xPos;
     private int yPos;
     private int width;
@@ -20,6 +26,8 @@ public class Brick {
         this.width = w;
         this.height = h;
 
+        brickImage = Model.loadImage("src/main/resources/brick.png");
+
     }
 
     // Brick Marshal Constructor
@@ -29,6 +37,9 @@ public class Brick {
         this.yPos = (int)obj.getLong("yPos");
         this.width = (int)obj.getLong("width");
         this.height = (int)obj.getLong("height");
+
+        brickImage = Model.loadImage("src/main/resources/brick.png");
+
 
     }
 
@@ -63,6 +74,10 @@ public class Brick {
 
     public void setHeight(int height) {
         this.height = height;
+    }
+
+    public BufferedImage getBrickImage() {
+        return brickImage;
     }
 
     // Json Marshal method

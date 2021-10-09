@@ -51,8 +51,7 @@ class View extends JPanel {
 
             // Get brick, set color, and paint to the screen
             Brick temp = model.getBricks().get(i);
-            g.setColor(slateGray);
-            g.fillRect(temp.getxPos() - model.getCameraPos(), temp.getyPos(), temp.getWidth(), temp.getHeight());
+            g.drawImage(temp.getBrickImage(), temp.getxPos() - model.getCameraPos(), temp.getyPos(), temp.getWidth(), temp.getHeight(), null);
 
         }
 
