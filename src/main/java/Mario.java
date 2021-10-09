@@ -10,15 +10,18 @@ public class Mario {
 
     // Declaring a static BufferedImage array to hold the mario images
     static BufferedImage[] marioImages;
+    private int marioImageCount;
 
     // Declaring private final member variable
     private final int groundPos = 400;
-    private final int marioImageHeight = 95;
 
     // Declaring private member variables
     private int xPos;
     private int yPos;
+    private int previousXPos;
+    private int previousYPos;
     private int marioJumpCounter;
+    private int marioLocationOffset;
     private double verticalVelocity;
 
     // Default constructor
@@ -27,9 +30,12 @@ public class Mario {
         xPos = 0;
         yPos = 0;
         marioJumpCounter = 0;
+        marioLocationOffset = 100;
         verticalVelocity = 0.0;
 
+        // Loading images into array
         marioImages = new BufferedImage[5];
+        marioImageCount = 0;
 
         for (int i = 0; i <= 4; i++) {
 
@@ -52,12 +58,44 @@ public class Mario {
         this.xPos = xPos;
     }
 
+    public void setXPosLeft(int xPos) {
+        this.xPos -= xPos;
+    }
+
+    public void setXPosRight(int xPos) {
+        this.xPos += xPos;
+    }
+
     public int getYPos() {
         return yPos;
     }
 
     public void setYPos(int yPos) {
         this.yPos = yPos;
+    }
+
+    public int getPreviousXPos() {
+        return previousXPos;
+    }
+
+    public void setPreviousXPos(int previousXPos) {
+        this.previousXPos = previousXPos;
+    }
+
+    public int getPreviousYPos() {
+        return previousYPos;
+    }
+
+    public void setPreviousYPos(int previousYPos) {
+        this.previousYPos = previousYPos;
+    }
+
+    public int getMarioLocationOffset() {
+        return marioLocationOffset;
+    }
+
+    public void setMarioLocationOffset(int marioLocationOffset) {
+        this.marioLocationOffset = marioLocationOffset;
     }
 
     public double getVerticalVelocity() {
@@ -72,29 +110,60 @@ public class Mario {
         return marioImages;
     }
 
+    public int getMarioImageCount() {
+        return marioImageCount;
+    }
+
+    public void setMarioImageCountToZero() {
+        this.marioImageCount = 0;
+    }
+
+    public void incrementMarioImageCount() {
+        this.marioImageCount++;
+    }
+
     public int getMarioJumpCounter() {
         return marioJumpCounter;
     }
 
-    void jump() {
+    public void setMarioJumpCounter(int marioJumpCounter) {
+        this.marioJumpCounter = marioJumpCounter;
+    }
 
-        verticalVelocity -= 6;
+    // toString override method
+    @Override
+    public String toString() {
+
+        return "Mario located at (" + xPos + ", " + yPos + ")\n Width: " + marioImages[0].getWidth() + "\n Height: " + marioImages[0].getHeight();
 
     }
 
+    // Make Mario jump
+    void jump() {
+
+        verticalVelocity = -20;
+
+    }
+
+    // Update method
     void update() {
 
+        final int marioHeight = getMarioImages()[0].getHeight();
+
+        // Simulate physics
         verticalVelocity += 1.2;
         yPos += verticalVelocity;
 
-        if (yPos > (groundPos) - marioImageHeight) {
+        // Keep mario on the ground
+        if (yPos > (groundPos) - marioHeight) {
 
             verticalVelocity = 0.0;
-            yPos = groundPos - marioImageHeight;
+            yPos = groundPos - marioHeight;
 
         }
 
-        if (yPos == (groundPos - marioImageHeight)) {
+        // If Mario is on the ground, make the jump counter 0
+        if (yPos == (groundPos - marioHeight)) {
 
             marioJumpCounter = 0;
 
@@ -104,7 +173,6 @@ public class Mario {
 
         }
 
-        System.out.println("Jump Count: " + marioJumpCounter + " Mario Y: " + yPos + " Ground: " + groundPos);
 
     }
 

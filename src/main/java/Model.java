@@ -19,16 +19,15 @@ public class Model {
     ArrayList<Brick> bricks;
 
     // Declare private member variables
-    private int cameraPos;
-    private int marioImageCount;
+    // private int marioImageCount;
 
     // Default constructor
     Model() {
 
         mario = new Mario();
         bricks = new ArrayList<>();
-        cameraPos = 0;
-        marioImageCount = 0;
+        // cameraPos = 0;
+        // marioImageCount = 0;
 
     }
 
@@ -37,7 +36,7 @@ public class Model {
 
         Json obj = Json.newObject();
 
-        obj.add("cameraPos", cameraPos);
+        // obj.add("cameraPos", cameraPos);
 
         Json tmplist = Json.newList();
         obj.add("bricks", tmplist);
@@ -58,7 +57,7 @@ public class Model {
             bricks.add(new Brick(tmpList.get(i)));
         }
 
-        cameraPos = (int)obj.getLong("cameraPos");
+        // cameraPos = (int)obj.getLong("cameraPos");
 
     }
 
@@ -71,29 +70,29 @@ public class Model {
         this.bricks = bricks;
     }
 
-    public int getCameraPos() {
-        return cameraPos;
-    }
+    // public int getCameraPos() {
+    //     return cameraPos;
+    // }
+    //
+    // public void setCameraPosLeft(int cameraPos) {
+    //     this.cameraPos -= cameraPos;
+    // }
+    //
+    // public void setCameraPosRight(int cameraPos) {
+    //     this.cameraPos += cameraPos;
+    // }
 
-    public void setCameraPosLeft(int cameraPos) {
-        this.cameraPos -= cameraPos;
-    }
-
-    public void setCameraPosRight(int cameraPos) {
-        this.cameraPos += cameraPos;
-    }
-
-    public int getMarioImageCount() {
-        return marioImageCount;
-    }
-
-    public void setMarioImageCountToZero() {
-        this.marioImageCount = 0;
-    }
-
-    public void incrementMarioImageCount() {
-        this.marioImageCount++;
-    }
+    // public int getMarioImageCount() {
+    //     return marioImageCount;
+    // }
+    //
+    // public void setMarioImageCountToZero() {
+    //     this.marioImageCount = 0;
+    // }
+    //
+    // public void incrementMarioImageCount() {
+    //     this.marioImageCount++;
+    // }
 
     // Create new Brick object and add it to Brick ArrayList
     public void createBrick(int x, int y, int w, int h) {

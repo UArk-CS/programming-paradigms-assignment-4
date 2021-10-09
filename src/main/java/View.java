@@ -41,19 +41,19 @@ class View extends JPanel {
     public void paintComponent(Graphics g) {
 
         // Draw background image, move it as mario moves at a fraction of the rate
-        g.drawImage(backgroundImage, 0 - (model.getCameraPos() / 10), 0, this.getWidth() + 100, this.getHeight(), null);
+        g.drawImage(backgroundImage, 0 - (model.mario.getMarioLocationOffset() / 10), 0, this.getWidth() + 100, this.getHeight(), null);
 
         Iterator<Brick> iterator = model.getBricks().iterator();
 
         while(iterator.hasNext()) {
 
             Brick temp = iterator.next();
-            g.drawImage(temp.getBrickImage(), temp.getxPos() - model.getCameraPos(), temp.getyPos(), temp.getWidth(), temp.getHeight(), null);
+            g.drawImage(temp.getBrickImage(), temp.getxPos() - model.mario.getXPos() + model.mario.getMarioLocationOffset(), temp.getyPos(), temp.getWidth(), temp.getHeight(), null);
 
         }
 
         // Draw Mario
-        g.drawImage(model.mario.getMarioImages()[model.getMarioImageCount()], model.mario.getXPos(), model.mario.getYPos(), null);
+        g.drawImage(model.mario.getMarioImages()[model.mario.getMarioImageCount()], model.mario.getXPos() - model.mario.getXPos() + model.mario.getMarioLocationOffset(), model.mario.getYPos(), null);
 
     }
 

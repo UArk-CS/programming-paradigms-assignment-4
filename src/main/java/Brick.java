@@ -80,6 +80,14 @@ public class Brick {
         return brickImage;
     }
 
+    // toString override method
+    @Override
+    public String toString() {
+
+        return "Brick located at (" + xPos + ", " + yPos + ")\n Width: " + width + "\n Height: " + height;
+
+    }
+
     // Json Marshal method
     Json marshal() {
 
